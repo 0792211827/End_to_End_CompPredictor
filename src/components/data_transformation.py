@@ -90,6 +90,14 @@ class DataTransformation:
             test_df = test_df.drop(columns=["Unnamed: 11", "Name", "Termination Date"], errors='ignore')
             logging.info("Dropped 'Unnamed: 11', 'Name', and 'Termination Date' columns.")
 
+            # Drop missing values and duplicates
+            train_df = train_df.dropna().drop_duplicates()
+            test_df = test_df.dropna().drop_duplicates()
+            logging.info("Dropped missing values and duplicates from train and test DataFrames.")
+
+
+
+
             # Convert 'Hire Date' to datetime format and calculate period worked
             train_df['Hire Date'] = pd.to_datetime(train_df['Hire Date'], errors='coerce')
             test_df['Hire Date'] = pd.to_datetime(test_df['Hire Date'], errors='coerce')
